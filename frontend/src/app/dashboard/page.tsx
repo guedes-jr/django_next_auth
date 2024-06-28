@@ -4,6 +4,7 @@ import useSWR from "swr";
 import { fetcher } from "@/app/fetcher";
 import { AuthActions } from "@/app/auth/utils";
 import { useRouter } from "next/navigation";
+import styles from "./Dashboard.module.css"
 
 export default function Home() {
   const router = useRouter();
@@ -26,13 +27,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center">
       <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 text-center">
-        <h1 className="text-2xl font-bold mb-4">Hi, {user?.username}!</h1>
-        <p className="mb-4">Your account details:</p>
-        <ul className="mb-4">
-          <li>Username: {user?.username}</li>
-          <li>Email: {user?.email}</li>
+        <h1 className="text-gray-500 text-2xl font-bold mb-4">Hi, {user?.username}!</h1>
+        <p className={styles.p}>Detalhes da sua conta:</p>
+        <ul className="mb-4 text-gray-500">
+          <li>Usuário: {user?.username}</li>
+          <li>Emais: {user?.email}</li>
         </ul>
         <button
           onClick={handleLogout}

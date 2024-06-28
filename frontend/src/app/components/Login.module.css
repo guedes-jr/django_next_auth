@@ -1,0 +1,26 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.image {
+    margin-right: 5%;
+}
+
+.login_form {
+    background-color: #fff;
+    padding: 5%;
+    border-radius: 5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.login_form_forgot {
+    float: right;
+}
+.ant_col_rtl .login_form_forgot {
+    float: left;
+}
+.login_form_button {
+    width: 100%;
+}
