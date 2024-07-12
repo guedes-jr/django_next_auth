@@ -4,6 +4,7 @@
 **/migrations
 **/__pycache__
 **/__pytest_cache__
+
 /node_modules
 /.pnp
 .pnp.js
