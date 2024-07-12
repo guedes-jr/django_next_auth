@@ -1,4 +1,4 @@
-#!/home/joao/Documentos/Outros/django-next-auth/venv/bin/python3
+#!/home/junior/django_next_auth/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -85,12 +85,22 @@ pip install -r requirements.txt
 
 ### Crie um banco de dados PostgreSQL e configure o usuário e senha no arquivo `settings`
 ```bash
-# Preparar banco de dados
-psql -U postgres -h localhost -c "create user django_next with password 'django_next'";
-psql -U postgres -h localhost -c "create database django_next owner django_next;";
-psql -U postgres -d django_next -h localhost -c "create extension unaccent";
-psql -U postgres -d django_next -h localhost -c "create extension pg_trgm"; 
+su postgres 
+
+psql
 ```
+```sql
+create user django_next with password 'django_next';
+create database django_next owner django_next;
+create extension unaccent;
+create extension pg_trgm; 
+```
+---
+> **ERRO:** Caso ocorra erro ao fazer o migrate, verifique o status do seu postgres
+> ```sudo service postgresql status```
+> se estiver `down` use o seguinte comando:
+> ```sudo service postgresql start ```
+
 ### Criar tabelas no banco de dados e um superusuário
 ```bash 
 # Aplicar models e criar as tabelas no banco de dados
