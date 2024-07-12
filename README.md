@@ -1,8 +1,4 @@
 
-<<<<<<< Updated upstream
-# Instalação
- 1. **Clone do Projeto**
-=======
 # 🌐 Django & Next.js Project
 <div align="center">
   <img src="./frontend/public/banner.png" alt="Logo do Projeto" width="200"/>
@@ -42,55 +38,52 @@
 
 ## 🛠️ Sobre o Projeto
 
-Este é um projeto full-stack que combina Django para o back-end e Next.js para o front-end. A aplicação visa fornecer uma plataforma robusta para [descrição do projeto].
+Este é um projeto full-stack que combina Django para o back-end e Next.js para o front-end. A aplicação visa fornecer uma plataforma robusta para novos projetos.
 
 ## 🧰 Tecnologias Utilizadas
 
 - [Django](https://www.djangoproject.com/) - Back-end framework
 - [Next.js](https://nextjs.org/) - React framework para front-end
 - [PostgreSQL](https://www.postgresql.org/) - Banco de dados
-- [Docker](https://www.docker.com/) - Contêineres
+- [AntDesign](https://ant.design/) - Estilização
 
 ## ✨ Funcionalidades
 
 - Autenticação de usuários
-- CRUD de [funcionalidade específica]
-- Integração com API externa para [descrição da integração]
+- CRUD de novos usuários
 - Interface responsiva e moderna
+- API interna para comunicação com o frontend
 
 ## 📋 Requisitos
 
-- Python 3.x
-- Node.js 14.x ou superior
-- Docker e Docker Compose (opcional)
+- Python 3
+- Node.js 14 ou superior
 - PostgreSQL
 
 ## 🚀 Instalação
 
 ### Clonando o Repositório
 
->>>>>>> Stashed changes
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio
+git clone https://github.com/guedes-jr/django_next_auth.git backend
+
+cd backend
 ```
 
-<<<<<<< Updated upstream
- 2. **Acesso o diretório `django_next_auth` e crie um ambiente virutal em python**
-```bash
-cd django_next_auth
+### Configurando o Back-end (Django)
 
+```bash
+# Criar ambiente virtual
 python3 -m venv venv
+
+# Ativar ambiente virtual
+source venv/bin/activate  # No Windows use `venv\Scripts\activate`
+
+# Instalar dependências necessárias para execução do projeto
+pip install -r requirements.txt
 ```
 
- 3. **Ativo o ambiente e instale os requerimentos presentes no arquivo requeriments.txt
-```bash
-source venv/bin/activate
-
-pip i -r requeriments.txt
-```
-4. **Crie um banco de dados postgres e configure o usuário e senha no arquivo ``settings`**
-
+### Crie um banco de dados PostgreSQL e configure o usuário e senha no arquivo `settings`
 ```bash
 # Preparar banco de dados
 psql -U postgres -h localhost -c "create user django_next with password 'django_next'";
@@ -98,54 +91,23 @@ psql -U postgres -h localhost -c "create database django_next owner django_next;
 psql -U postgres -d django_next -h localhost -c "create extension unaccent";
 psql -U postgres -d django_next -h localhost -c "create extension pg_trgm"; 
 ```
-5 .**Use o makemigratios e migrate para criar a estrutura de tabelas no banco de dados
-```bash
-python manage.py makmigrations
-
+### Criar tabelas no banco de dados e um superusuário
+```bash 
+# Aplicar models e criar as tabelas no banco de dados
 python manage.py migrate
-```
-6. **Crie um superusuário para ter acesso a aplicação e ao djanbgo admin**
-```bash
-python3 manage.py createsuperuser
-```
 
-7. **Inicie o server do django**
-```bash
-python3 manage.py runserver
-```
-
-8. **Acesse o diretório `frontend` e instale os modulos do node**
-```bash
-cd frontend
-
-npm i 
-```
-10. **Inicie o server do nextjs**
-```bash
-npm run dev
-```
-=======
-### Configurando o Back-end (Django)
-
-```bash
-cd backend
-python -m venv venv
-source venv/bin/activate  # No Windows use `venv\Scripts\activate`
-pip install -r requirements.txt
-python manage.py migrate
+# Criar super usuário para ter acesso a aplicação e ao django admin (web)
 python manage.py createsuperuser  # Siga as instruções para criar um superusuário
 ```
 
 ### Configurando o Front-end (Next.js)
 
 ```bash
-cd ../frontend
+cd frontend
 npm install
 ```
 
 ### Executando a Aplicação
-
-#### Sem Docker
 
 **Back-end:**
 
@@ -160,12 +122,6 @@ python manage.py runserver
 ```bash
 cd frontend
 npm run dev
-```
-
-#### Com Docker
-
-```bash
-docker-compose up --build
 ```
 
 ## 📦 Scripts Disponíveis
@@ -183,27 +139,64 @@ Na pasta `backend`, você pode rodar:
 ## 📁 Estrutura de Pastas
 
 ```plaintext
-.
 ├── backend
-│   ├── manage.py
-│   ├── myproject
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   └── app
-│       ├── migrations
-│       ├── models.py
-│       ├── views.py
-│       └── ...
+├── ApiRoot
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── LICENSE
+├── README.md
+├── auth
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   └── views.py
 ├── frontend
+│   ├── README.md
+│   ├── next.config.mjs
+│   ├── package-lock.json
 │   ├── package.json
-│   ├── pages
-│   │   ├── index.js
-│   │   └── ...
-│   └── public
-├── docker-compose.yml
-└── README.md
+│   ├── postcss.config.mjs
+│   ├── public
+│   │   ├── banner.png
+│   │   ├── next.svg
+│   │   └── vercel.svg
+│   ├── src
+│   │   ├── app
+│   │   │   ├── auth
+│   │   │   │   ├── password
+│   │   │   │   │   ├── reset-password
+│   │   │   │   │   │   └── page.tsx
+│   │   │   │   │   └── reset-password-confirmation
+│   │   │   │   │       └── page.tsx
+│   │   │   │   ├── register
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── utils.ts
+│   │   │   ├── components
+│   │   │   │   ├── Login.module.css
+│   │   │   │   ├── Login.tsx
+│   │   │   │   ├── Register.tsx
+│   │   │   │   ├── ResetPassword.tsx
+│   │   │   │   └── ResetPasswordConfirmation.tsx
+│   │   │   ├── dashboard
+│   │   │   │   ├── Dashboard.module.css
+│   │   │   │   └── page.tsx
+│   │   │   ├── favicon.ico
+│   │   │   ├── fetcher.ts
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   └── middleware.ts
+│   ├── tailwind.config.ts
+│   └── tsconfig.json
+├── manage.py
+└── requirements.txt
 ```
+> Comando utilizado para mostrar a estrutura de dados `tree -I 'node_modules' -I '__pycache__' -I 'migrations' -I 'venv'`.
 
 ## 🤝 Contribuindo
 
@@ -223,11 +216,10 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 👤 **Seu Nome**
 
-- Github: [@seu-usuario](https://github.com/seu-usuario)
-- LinkedIn: [Seu Nome](https://www.linkedin.com/in/seu-usuario)
-- Email: seu-email@example.com
+- Github: [@guedes-jr](https://github.com/guedes-jr)
+- LinkedIn: [João Guedes](https://www.linkedin.com/in/jo%C3%A3o-guedes-36a440135)
+- Email: joao.guedes.developer@gmail.com
 
 ---
 
-Desenvolvido com profissionalismo por [Seu Nome](https://github.com/seu-usuario) 🤖.
->>>>>>> Stashed changes
+Desenvolvido com profissionalismo por [João Guedes](https://github.com/guedes-jr) 🤖.
