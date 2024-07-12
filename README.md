@@ -106,10 +106,10 @@ create extension pg_trgm;
 ### Criar tabelas no banco de dados e um superusuário
 ```bash 
 # Aplicar models e criar as tabelas no banco de dados
-python manage.py migrate
+python3 manage.py migrate
 
 # Criar super usuário para ter acesso a aplicação e ao django admin (web)
-python manage.py createsuperuser  # Siga as instruções para criar um superusuário
+python3 manage.py createsuperuser  # Siga as instruções para criar um superusuário
 ```
 
 ### Configurando o Front-end (Next.js)

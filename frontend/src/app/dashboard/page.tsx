@@ -127,8 +127,8 @@ export default function Home() {
             onClick={() => setCollapsed(!collapsed)}
             className={styles.button}
           />
-          <h3>{user?.username}</h3>
-          {user?.email}
+          Username: {user?.username} | Email: {user?.email}
+          
           <Switch
             checked={myTheme === 'dark'}
             onChange={changeTheme}
