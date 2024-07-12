@@ -3,12 +3,16 @@
 # dependencies
 **/migrations
 **/__pycache__
-**/__pytest_cache__
+.pytest_cache
+venv
+.env
 
-/node_modules
+**/node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
+
+**/logs
 
 # testing
 /coverage
@@ -23,6 +27,7 @@
 # misc
 .DS_Store
 *.pem
+**/.next
 
 # debug
 npm-debug.log*
