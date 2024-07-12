@@ -92,6 +92,8 @@ psql
 ```sql
 create user django_next with password 'django_next';
 create database django_next owner django_next;
+
+\c django_next
 create extension unaccent;
 create extension pg_trgm; 
 ```
