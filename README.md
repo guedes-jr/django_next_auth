@@ -101,7 +101,7 @@ create extension pg_trgm;
 > **ERRO:** Caso ocorra erro ao fazer o migrate, verifique o status do seu postgres
 > ```sudo service postgresql status```
 > se estiver `down` use o seguinte comando:
-> ```sudo service postgresql start ```
+> ```sudo service postgresql start```
 
 ### Criar tabelas no banco de dados e um superusuário
 ```bash 
