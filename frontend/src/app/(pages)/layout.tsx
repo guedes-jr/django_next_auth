@@ -78,7 +78,7 @@ export default function RootLayout({
       });
   };
   return (
-    <html lang="en">
+    <html lang="pt-BR">
       <body className={inter.className}>
         <Layout>
           <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -107,7 +107,7 @@ export default function RootLayout({
                 onClick={() => setCollapsed(!collapsed)}
                 className={styles.button}
               />
-             {JSON.stringify(user)}
+             <Link href="/profile">{JSON.stringify(user)}</Link>
               
               <Switch
                 checked={myTheme === 'dark'}
