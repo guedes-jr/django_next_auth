@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import { fetcher } from "@/app/fetcher";
 import { AuthActions } from "@/app/auth/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import styles from "./Layoout.module.css"
 import React, { useState } from 'react';
 import type { MenuProps, MenuTheme } from 'antd';
@@ -12,10 +12,10 @@ import {
   MenuUnfoldOutlined,
   AppstoreOutlined,
   SettingOutlined,
-  PoweroffOutlined,
+  LogoutOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme, Switch } from 'antd';
+import { Button, Layout, Menu, theme, Switch, Breadcrumb } from 'antd';
 import Link from "next/link";
 import { Inter } from "next/font/google";
 
@@ -44,8 +44,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname()
   const router = useRouter();
   const { data: user } = useSWR("/auth/users/me", fetcher);
+  console.log(user)
   const { logout, removeTokens } = AuthActions();
   const [collapsed, setCollapsed] = useState(false);
   const [loadings, setLoadings] = useState<boolean[]>([]);
@@ -116,12 +118,14 @@ export default function RootLayout({
                 unCheckedChildren="Light"
               />
               <Button
-                type="primary"
-                icon={<PoweroffOutlined />}
+                icon={<LogoutOutlined />}
                 loading={loadings[2]}
                 onClick={handleLogout}
               />
             </Header>
+            <Breadcrumb style={{ margin: '5px 15px 0' }}>
+              <Breadcrumb.Item>{pathname}</Breadcrumb.Item>
+            </Breadcrumb>
             <Content className={styles.content}>
             {children}
             </Content>
