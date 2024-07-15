@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { fetcher } from "@/app/fetcher";
 import { AuthActions } from "@/app/auth/utils";
 import { useRouter, usePathname } from "next/navigation";
-import styles from "./Layoout.module.css"
+import styles from "./Layoout.module.css";
 import React, { useState } from 'react';
 import type { MenuProps, MenuTheme } from 'antd';
 import {
@@ -15,9 +15,10 @@ import {
   LogoutOutlined,
   UsergroupAddOutlined,
 } from '@ant-design/icons';
-import { Button, Layout, Menu, theme, Switch, Breadcrumb } from 'antd';
+import { Button, Layout, Menu, theme, Breadcrumb, Avatar, Dropdown, Space } from 'antd';
 import Link from "next/link";
 import { Inter } from "next/font/google";
+import Loading from "./loading";
 
 const inter = Inter({ subsets: ["latin"] });
 type MenuItem = Required<MenuProps>['items'][number];
@@ -39,15 +40,22 @@ const menuItems: MenuItem[] = [
   },
 ];
 
+const dropdownItems: MenuProps['items'] = [
+  {
+    key: '1',
+    label: (
+      <Link href="/perfil">
+        Ver Perfil
+      </Link>
+    ),
+  },
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname()
-  const router = useRouter();
-  const { data: user } = useSWR("/auth/users/me", fetcher);
-  console.log(user)
   const { logout, removeTokens } = AuthActions();
   const [collapsed, setCollapsed] = useState(false);
   const [loadings, setLoadings] = useState<boolean[]>([]);
@@ -55,12 +63,21 @@ export default function RootLayout({
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const [myTheme, setMyTheme] = useState<MenuTheme>('dark');
   const [current, setCurrent] = useState('1');
+  const pathname = usePathname();
+  const router = useRouter();
+  const { data, error } = useSWR("/auth/users/me", fetcher);
 
-  const changeTheme = (value: boolean) => {
-    setMyTheme(value ? 'dark' : 'light');
-  };
+  if (error) return <div>Failed to load user data.</div>;
+  if (!data) return <Loading />;
+
+  let user;
+  try {
+    user = typeof data === 'string' ? JSON.parse(data) : data;
+  } catch (e) {
+    console.error('Failed to parse user data:', e);
+    return <div>Failed to parse user data.</div>;
+  }
 
   const onClick: MenuProps['onClick'] = (e) => {
     console.log('click ', e);
@@ -71,7 +88,6 @@ export default function RootLayout({
     logout()
       .res(() => {
         removeTokens();
-
         router.push("/");
       })
       .catch(() => {
@@ -79,6 +95,7 @@ export default function RootLayout({
         router.push("/");
       });
   };
+
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
@@ -86,7 +103,7 @@ export default function RootLayout({
           <Sider trigger={null} collapsible collapsed={collapsed}>
             <div className="demo-logo-vertical" />
             <Menu
-              theme={myTheme}
+              theme={user.theme}
               onClick={onClick}
               defaultOpenKeys={['sub1']}
               selectedKeys={[current]}
@@ -109,25 +126,29 @@ export default function RootLayout({
                 onClick={() => setCollapsed(!collapsed)}
                 className={styles.button}
               />
-             <Link href="/profile">{JSON.stringify(user)}</Link>
-              
-              <Switch
-                checked={myTheme === 'dark'}
-                onChange={changeTheme}
-                checkedChildren="Dark"
-                unCheckedChildren="Light"
-              />
-              <Button
-                icon={<LogoutOutlined />}
-                loading={loadings[2]}
-                onClick={handleLogout}
-              />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginRight: '2rem'}}>
+                <h3>
+                 {user.first_name + ' ' + user.last_name}
+                </h3>
+                <Dropdown overlay={<Menu items={dropdownItems} />} placement="bottomRight" arrow>
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <Avatar src={user.profile_image ? user.profile_image : '/media/profile-default.png'} />
+                    </Space>
+                  </a>
+                </Dropdown>
+                <Button
+                  icon={<LogoutOutlined />}
+                  loading={loadings[2]}
+                  onClick={handleLogout}
+                />
+              </div>
             </Header>
             <Breadcrumb style={{ margin: '5px 15px 0' }}>
               <Breadcrumb.Item>{pathname}</Breadcrumb.Item>
             </Breadcrumb>
             <Content className={styles.content}>
-            {children}
+              {children}
             </Content>
           </Layout>
         </Layout>
