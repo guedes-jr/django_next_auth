@@ -24,17 +24,16 @@
 
 ## 📝 Sumário
 
-- [Sobre o Projeto](#sobre-o-projeto)
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)
-- [Funcionalidades](#funcionalidades)
-- [Requisitos](#requisitos)
-- [Instalação](#instalação)
-- [Uso](#uso)
-- [Scripts Disponíveis](#scripts-disponíveis)
-- [Estrutura de Pastas](#estrutura-de-pastas)
-- [Contribuindo](#contribuindo)
-- [Licença](#licença)
-- [Contato](#contato)
+- [Sobre o Projeto](#%EF%B8%8Fsobre-o-projeto)
+- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
+- [Funcionalidades](#-funcionalidades)
+- [Requisitos](#-requisitos)
+- [Instalação](#-instalação)
+- [Scripts Disponíveis](#-scripts-disponíveis)
+- [Estrutura de Pastas](#-estrutura-de-pastas)
+- [Contribuindo](#-contribuindo)
+- [Licença](#-licença)
+- [Contato](#-contato)
 
 ## 🛠️ Sobre o Projeto
 
