@@ -225,7 +225,7 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ## 📧 Contato
 
-👤 **Seu Nome**
+👤 **João Guedes M. Jr**
 
 - Github: [@guedes-jr](https://github.com/guedes-jr)
 - LinkedIn: [João Guedes](https://www.linkedin.com/in/jo%C3%A3o-guedes-36a440135)
