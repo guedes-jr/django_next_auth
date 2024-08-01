@@ -103,7 +103,10 @@ create extension pg_trgm;
 > ```sudo service postgresql start```
 
 ### Criar tabelas no banco de dados e um superusuário
-```bash 
+```bash
+# Para identificar as alterações realizadas em meu user customizado
+python3 manage.py makemigrations custom_auth
+
 # Aplicar models e criar as tabelas no banco de dados
 python3 manage.py migrate
 
